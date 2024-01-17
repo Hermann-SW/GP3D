@@ -1,3 +1,4 @@
+my(writer);
 /*
 "use strict"; // avoid module leak
 
@@ -20,31 +21,34 @@ if (true) {
     function out(x) {
         return (typeof(x) === 'object') ? JSON.stringify(x) : x;
     }
-
-    exports.wlog_ = function (...s) {
-        writer.write(out(s[0]));
-        for(var i=1; i<s.length; ++i) {
-            writer.write(" " + out(s[i]));
-        }
-    }
-    var wlog_ = exports.wlog_;
-    exports.wlog = function (...s) {
-        writer.write(out(s[0]));
-        for(var i=1; i<s.length; ++i) {
-            writer.write(" " + out(s[i]));
-        }
-        writer.write("\n");
-    }
-    var wlog = exports.wlog;
-
-    exports.open = function (name = 'x.jscad') {
-        writer = fs.createWriteStream(name);
+*/
+    jscad.wlog_=(args[..])->{
+        my(nargs=#args);
+        if(nargs>0,filewrite1(writer,args[1]);
+            foreach(args[2..nargs],arg,
+                filewrite1(writer," ");filewrite1(writer,arg)
+            )
+        );
     };
 
-    exports.close = function () {
-        writer.close();
+    jscad.wlog=(args[..])->{
+        my(nargs=#args);
+        if(nargs>0,filewrite1(writer,args[1]);
+            foreach(args[2..nargs],arg,
+                filewrite1(writer," ");filewrite1(writer,arg)
+            )
+        );
+        filewrite(writer,"");
     };
 
+    jscad.open=(name="gp.jscad")->{
+        writer = fileopen(name,"w");
+    };
+
+    jscad.close=()->{
+        fileclose(writer);
+    };
+/*
     exports.header = function (coords, sc) {
         wlog("const jscad = require('@jscad/modeling')");
         wlog("const { colorize } = jscad.colors");
