@@ -12,3 +12,21 @@ More details on implementation:
 [https://forums.raspberrypi.com/viewtopic.php?t=333342&start=75#p2033996](https://forums.raspberrypi.com/viewtopic.php?t=333342&start=75#p2033996)  
 
 ![res/C36.10.fixed.jscad.png](res/C36.10.fixed.jscad.png)  
+
+### workinprogress
+
+```
+pi@raspberrypi5:~/GP3D $ make
+gp -q < demo.gp
+diff gp.jscad gp.jscad.good
+pi@raspberrypi5:~/GP3D $ make clean
+rm gp.jscad
+pi@raspberrypi5:~/GP3D $ cat demo.gp 
+readvec("jscad.gp");
+jscad.open();
+jscad.wlog();
+jscad.wlog_(5!,2^7);
+jscad.wlog(5!,2^7);
+jscad.close();
+pi@raspberrypi5:~/GP3D $ 
+```
