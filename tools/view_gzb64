@@ -1,0 +1,5 @@
+#!/bin/bash
+browser=firefox
+browser=chromium-browser
+
+$browser "https://3d.hrg.hr/jscad/app1/#data:application/gzip;base64,`gzip -c $1 | base64 -w 0`"
