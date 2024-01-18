@@ -1,27 +1,19 @@
 my(writer);
-/*
-"use strict"; // avoid module leak
 
-var exports = {};
-var scad = exports;
+    eps=0.00001;
 
-if (true) {
-    var fs = require("fs");
-    var writer;
-    var eps = 1e-5;
-
-    exports.rad2deg = function (r) {
-        return r / Math.PI * 180;
+    jscad.rad2deg=(r)->{
+        return(r / Pi * 180);
     }
 
-    exports.srad2deg = function (p) {
-        return [exports.rad2deg(p[0]), exports.rad2deg(p[1])];
+    jscad.srad2deg=(p)->{
+        return([jscad.rad2deg(p[1]), jscad.rad2deg(p[2])]);
     }
 
-    function out(x) {
-        return (typeof(x) === 'object') ? JSON.stringify(x) : x;
+    function out=(x)->{
+\\        return (typeof(x) === 'object') ? JSON.stringify(x) : x;
     }
-*/
+
     jscad.wlog_=(args[..])->{
         my(nargs=#args);
         if(nargs>0,filewrite1(writer,args[1]);
@@ -48,8 +40,9 @@ if (true) {
     jscad.close=()->{
         fileclose(writer);
     };
-/*
-    exports.header = function (coords, sc) {
+
+    jscad.header=(coords, sc)->{
+        my(wlog=jscad.wlog);
         wlog("const jscad = require('@jscad/modeling')");
         wlog("const { colorize } = jscad.colors");
         wlog("const { cuboid, cube, sphere, cylinder, circle, polygon } = jscad.primitives");
@@ -66,7 +59,6 @@ if (true) {
         wlog("     { name: 'faces', type: 'choice', values: ['Pentagons', '6coloring', 'None'], initial: 'Pentagons', caption: 'face coloring:' },");
         wlog("    ,{ name: 'white', type: 'checkbox', checked: true, initial: '20', caption: 'surface of sphere:' },");
         wlog("    ,{ name: 'half', type: 'checkbox', checked: true, initial: '20', caption: 'half vertex:' },");
-        wlog("    ,{ name: 'vtxt', type: 'choice', values: ['Id', 'Type', 'theta', 'phi', 'None'], initial: 'Type', caption: 'vtxt:' },");
         wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'no', caption: 'look_inside:' }");
         wlog("  ];");
         wlog("}");
@@ -75,18 +67,10 @@ if (true) {
         wlog("  return [Math.cos(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.sin(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.cos(degToRad(c[1]))*sc]");
         wlog("}");
 
-        wlog("eps =", eps);
+        wlog("eps =", strprintf("%f",eps));
 
         wlog("sc =", sc);
-        wlog("coords =[");
-        coords.forEach(function (p, i) {
-            if (i > 0) {
-                wlog(",", exports.srad2deg(p));
-            } else {
-                wlog(exports.srad2deg(p));
-            }
-        });
-        wlog("]");
+        wlog("coords =",coords);
 
         wlog("function vertex(_v, half=false) {");
         wlog("    p = coords[_v] ");
@@ -174,7 +158,8 @@ if (true) {
         wlog("}");
     };
 
-    exports.header2 = function () {
+    jscad.header2=()->{
+        my(wlog=jscad.wlog);
         wlog("function edge2(_p1, _p2, _e) {");
         wlog("    p1 = coords[_p1]");
         wlog("    p2 = coords[_p2]");
@@ -321,5 +306,3 @@ if (true) {
         wlog("    }");
         wlog("}");
     };
-}
-*/
