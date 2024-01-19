@@ -6,7 +6,7 @@ This repo provides 3D graphics for PARI/GP, by generating JSCAD output for view+
 The functions for displaying graph vertices, edges (direct as well as great circle for sqhere embedding), faces, labels, ... are ported from [https://github.com/Hermann-SW/planar_graph_playground](https://github.com/Hermann-SW/planar_graph_playground) repo nodejs implementation.  
 
 This link opens openjscad.xyz with C36 fullerene planar embedding onto the sphere, with user defined menu bottom left for allowing dynamic change of display in addition to zoom/translate/rotate:  
-[https://openjscad.xyz/?uri=https://stamm-wilbrandt.de/en/forum/C36_10.correct.jscad](https://openjscad.xyz/?uri=https://stamm-wilbrandt.de/en/forum/C36_10.correct.jscad)  
+[https://openjscad.xyz/?uri=https://stamm-wilbrandt.de/en/forum/_C36_10.correct.jscad](https://openjscad.xyz/?uri=https://stamm-wilbrandt.de/en/forum/_C36_10.correct.jscad)  
 
 More details on implementation:  
 [https://forums.raspberrypi.com/viewtopic.php?t=333342&start=75#p2033996](https://forums.raspberrypi.com/viewtopic.php?t=333342&start=75#p2033996)  
