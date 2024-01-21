@@ -74,6 +74,15 @@ readvec("jscad.gp");
         if(vecsearch(Ms,v),jscad.wlog_(")"));
         jscad.wlog("");
     );
+    \\ double draw, not nice
+    foreach(M,v,
+        jscad.wlog_(",");
+        if(vecsearch(Ms,v),
+            jscad.wlog_("colorize([0.7, 0, 0], "));
+        jscad.wlog_("vertex(", v, ", false)");
+        if(vecsearch(Ms,v),jscad.wlog_(")"));
+        jscad.wlog("");
+    );
 
     MS=vecsort(M);
     for(v=0,#A-1,
@@ -95,6 +104,17 @@ readvec("jscad.gp");
     jscad.wlog(",vtxts");
 
     jscad.wlog("] }");
+
+    jscad.wlog("function getParameterDefinitions() {");
+    jscad.wlog("  return [");
+    jscad.wlog("     { name: 'faces', type: 'choice', values: ['Pentagons', '6coloring', 'None'], initial: 'Pentagons', caption: 'face coloring:' },");
+    jscad.wlog("    ,{ name: 'white', type: 'checkbox', checked: true, initial: '20', caption: 'surface of sphere:' },");
+    jscad.wlog("    ,{ name: 'half', type: 'checkbox', checked: true, initial: '20', caption: 'half vertex:' },");
+    jscad.wlog("    ,{ name: 'vtxt', type: 'choice', values: ['Id', 'theta', 'phi', 'None'], initial: 'Id', caption: 'vtxt:' },");
+    jscad.wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'no', caption: 'look_inside:' }");
+    jscad.wlog("  ];");
+    jscad.wlog("}");
+
     jscad.wlog("module.exports = { main, getParameterDefinitions }");
 
     jscad.close();

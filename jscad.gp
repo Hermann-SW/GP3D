@@ -54,16 +54,6 @@ my(writer);
         wlog("const { hull, hullChain } = require('@jscad/modeling').hulls");
         wlog("const { vectorText } = require('@jscad/modeling').text");
 
-        wlog("function getParameterDefinitions() {");
-        wlog("  return [");
-        wlog("     { name: 'faces', type: 'choice', values: ['Pentagons', '6coloring', 'None'], initial: 'Pentagons', caption: 'face coloring:' },");
-        wlog("    ,{ name: 'white', type: 'checkbox', checked: true, initial: '20', caption: 'surface of sphere:' },");
-        wlog("    ,{ name: 'half', type: 'checkbox', checked: true, initial: '20', caption: 'half vertex:' },");
-        wlog("    ,{ name: 'vtxt', type: 'choice', values: ['Id', 'theta', 'phi', 'None'], initial: 'Id', caption: 'vtxt:' },");
-        wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'no', caption: 'look_inside:' }");
-        wlog("  ];");
-        wlog("}");
-
         wlog("function map_3D(c, sc) {");
         wlog("  return [Math.cos(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.sin(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.cos(degToRad(c[1]))*sc]");
         wlog("}");
