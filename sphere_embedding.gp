@@ -47,29 +47,52 @@ readvec("jscad.gp");
     jscad.wlog("  )");
     jscad.wlog("]");
 
+    jscad.wlog_("vtype = [");
+    for(v=0,#A-1,
+        jscad.wlog_(if(v>0,","," "));
+        jscad.wlog("[", v, ", coords[", v, "][1].toFixed(1), coords[", v, "][0].toFixed(1)]");
+    );
+    jscad.wlog("]");
+
+    scad.wlog("tvtxt = (params.vtxt === 'theta') ? 1 : (params.vtxt === 'phi') ? 2 : 0");
+
+    jscad.wlog("vtxts = (params.vtxt === 'None') ? [] : [");
+    for(v=0,#A-1,
+        jscad.wlog_(if(v>0,","," "));
+        jscad.wlog("vtxt(", v, ", vtype[", v, "][tvtxt])");
+    );
+    jscad.wlog("]");
+
     jscad.wlog("    return[");
 
     Ms=vecsort(M[1..4]);
-/*
-    for(v=1,#A,
+    for(v=0,#A-1,
         jscad.wlog_(",");
         if(vecsearch(Ms,v),
             jscad.wlog_("colorize([0.7, 0, 0], "));
         jscad.wlog_("vertex(", v, ", params.half)");
-        if(vecsearch(Ms,v,jscad.wlog(")");,jscad.wlog(""););
+        if(vecsearch(Ms,v),jscad.wlog_(")"));
+        jscad.wlog("");
     );
-*/
-/*
-    forall_edges(G, function(e) {
-            scad.wlog_(",");
-            if (evisited[e]) { scad.wlog_("colorize([1,0.66666,0],"); }
-            scad.wlog_("edge2(", source(G, e), ",", target(G, e), ",", e, ")");
-            if (evisited[e]) { scad.wlog(")"); } else { scad.wlog(""); }
-    });
-*/
-    jscad.wlog("pentagons");
+
+    MS=vecsort(M);
+    for(v=0,#A-1,
+        foreach(A[1+v],w,
+            if(v<w,
+                scad.wlog_(",");
+                onM=vecsearch(MS,v)&&vecsearch(MS,w);
+                if(onM,jscad.wlog_("colorize([1,0.66666,0],"));
+                scad.wlog_("edge2(", v, ",", w, ",", 0, ")");
+                if(onM,jscad.wlog_(")"));
+                jscad.wlog("");
+            );
+        );
+    );
+
+    jscad.wlog(",pentagons");
     jscad.wlog(",sixcol");
     jscad.wlog(",white");
+    jscad.wlog(",vtxts");
 
     jscad.wlog("] }");
     jscad.wlog("module.exports = { main, getParameterDefinitions }");
