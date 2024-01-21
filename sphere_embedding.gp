@@ -1,14 +1,15 @@
 readvec("jscad.gp");
+readvec("undirected_graph.gp");
 {
     name=getenv("name");
-    A=readvec(name)[1];
+    [V,E]=ugraph(name);
     faces=readvec(concat(name,".faces"))[1];
     pent=[f|f<-faces,#f==5];
     M=readvec(concat(name,".M"))[1];
     coords=readvec(concat(name,".coords"))[1];
     col=readvec(concat(name,".col"))[1];
 
-    sc=sqrt(#A);
+    sc=sqrt(#V);
 
     jscad.open();
     pal = [ [0.9, 0.0, 0], [0, 0.7, 0.7], [0, 0.9, 0], [0.7, 0, 0.7], [0, 0, 0.9], [0.7, 0.7, 0] ];
@@ -48,8 +49,8 @@ readvec("jscad.gp");
     jscad.wlog("]");
 
     jscad.wlog_("vtype = [");
-    for(v=0,#A-1,
-        jscad.wlog_(if(v>0,","," "));
+    foreach(V,v,
+        jscad.wlog_(if(v!=V[1],","," "));
         jscad.wlog("[", v, ", coords[", v, "][1].toFixed(1), coords[", v, "][0].toFixed(1)]");
     );
     jscad.wlog("]");
@@ -57,8 +58,8 @@ readvec("jscad.gp");
     scad.wlog("tvtxt = (params.vtxt === 'theta') ? 1 : (params.vtxt === 'phi') ? 2 : 0");
 
     jscad.wlog("vtxts = (params.vtxt === 'None') ? [] : [");
-    for(v=0,#A-1,
-        jscad.wlog_(if(v>0,","," "));
+    foreach(V,v,
+        jscad.wlog_(if(v!=V[1],","," "));
         jscad.wlog("vtxt(", v, ", vtype[", v, "][tvtxt])");
     );
     jscad.wlog("]");
@@ -66,36 +67,23 @@ readvec("jscad.gp");
     jscad.wlog("    return[");
 
     Ms=vecsort(M[1..4]);
-    for(v=0,#A-1,
+    MS=vecsort(M);
+    foreach(V,v,
         jscad.wlog_(",");
         if(vecsearch(Ms,v),
             jscad.wlog_("colorize([0.7, 0, 0], "));
-        jscad.wlog_("vertex(", v, ", params.half)");
-        if(vecsearch(Ms,v),jscad.wlog_(")"));
-        jscad.wlog("");
-    );
-    \\ double draw, not nice
-    foreach(M,v,
-        jscad.wlog_(",");
-        if(vecsearch(Ms,v),
-            jscad.wlog_("colorize([0.7, 0, 0], "));
-        jscad.wlog_("vertex(", v, ", false)");
+        jscad.wlog_("vertex(", v, if(vecsearch(MS,v),", false)",", params.half)"));
         if(vecsearch(Ms,v),jscad.wlog_(")"));
         jscad.wlog("");
     );
 
-    MS=vecsort(M);
-    for(v=0,#A-1,
-        foreach(A[1+v],w,
-            if(v<w,
-                scad.wlog_(",");
-                onM=vecsearch(MS,v)&&vecsearch(MS,w);
-                if(onM,jscad.wlog_("colorize([1,0.66666,0],"));
-                scad.wlog_("edge2(", v, ",", w, ",", 0, ")");
-                if(onM,jscad.wlog_(")"));
-                jscad.wlog("");
-            );
-        );
+    foreach(E,e,[v,w]=e;
+        scad.wlog_(",");
+        onM=vecsearch(MS,v)&&vecsearch(MS,w);
+        if(onM,jscad.wlog_("colorize([1,0.66666,0],"));
+        scad.wlog_("edge2(", v, ",", w, ",", 0, ")");
+        if(onM,jscad.wlog_(")"));
+        jscad.wlog("");
     );
 
     jscad.wlog(",pentagons");
