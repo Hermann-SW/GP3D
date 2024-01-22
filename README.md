@@ -50,3 +50,6 @@ pi@raspberrypi5:~/GP3D $
 [https://jscad.app/#https://gist.githubusercontent.com/Hermann-SW/b3e85c8fe6827cd29238c14f9da346be/raw/C36.10.fixed.jscad.good_enough.jscad](https://jscad.app/#https://gist.githubusercontent.com/Hermann-SW/b3e85c8fe6827cd29238c14f9da346be/raw/C36.10.fixed.jscad.good_enough.jscad)
 
 ![res/C36.10.fixed.jscad.good_enough.png](res/C36.10.fixed.jscad.good_enough.png)
+
+With "surface of sphere" turned off, effect of "half vertex" for those vertices not on separating circle can be seen best:  
+![res/JSCAD.half_vertex.png](res/JSCAD.half_vertex.png)
