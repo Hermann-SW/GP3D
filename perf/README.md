@@ -44,7 +44,7 @@ Pentagons|7260|4948|9835
 
 
 The additional time seems to be spent here:  
-![res/dt.stacktrace.png](res/dt.stacktrace.png)
+![../res/dt.stacktrace.png](../res/dt.stacktrace.png)
 
 
 ## Summary
@@ -59,4 +59,4 @@ Pi5 |Pi5 3GHz|Celeron|face coloring|Pi5 |Pi5 3GHz|Celeron
 6300|5105|6539|6coloring|6816|6480|7801
 
 C36 fullerene face coloring with 6 colors in jscad.app:  
-![res/dt.6coloring.png](res/dt.6coloring.png)
+![../res/dt.6coloring.png](../res/dt.6coloring.png)
