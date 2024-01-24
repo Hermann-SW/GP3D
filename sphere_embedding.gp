@@ -18,6 +18,7 @@ readvec("undirected_graph.gp");
     jscad.header2();
    
     jscad.wlog("function main(params) {");
+    jscad.wlog("    t0=new Date().getTime()");
     jscad.wlog("    sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,-sc/2,sc/2]})]");
 
     jscad.wlog("pentagons = (params.faces !== 'Pentagons') ? [] : [[]");
@@ -64,7 +65,7 @@ readvec("undirected_graph.gp");
     );
     jscad.wlog("]");
 
-    jscad.wlog("    return[");
+    jscad.wlog("    ret = [");
 
     Ms=vecsort(M[1..4]);
     MS=vecsort(M);
@@ -91,7 +92,9 @@ readvec("undirected_graph.gp");
     jscad.wlog(",white");
     jscad.wlog(",vtxts");
 
-    jscad.wlog("] }");
+    jscad.wlog("]");
+    jscad.wlog("console.log(\"dt=\"+(new Date().getTime()-t0)+\"ms\")");
+    jscad.wlog("return ret }");
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
