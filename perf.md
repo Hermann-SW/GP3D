@@ -43,7 +43,7 @@ Pentagons|7260|4948|9835
 6oloring|6816|6480|7801
 
 
-The additional time seems to be spent here:
+The additional time seems to be spent here:  
 ![res/dt.stacktrace.png](res/dt.stacktrace.png)
 
 
