@@ -10,7 +10,7 @@ rendering|✓|✓
 smooth rendering|−|✓
  | | | |
 drag&drop |✓ |✓ | |
-drag&drop rendering¹| |✓ | |
+drag&drop rendering¹|−|✓ | |
 
 ¹ automatic rendering in case drag&drop file gets changed (does not work with firefox)
 
