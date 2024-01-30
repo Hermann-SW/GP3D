@@ -2,4 +2,9 @@
 browser=firefox
 browser=chromium-browser
 
-$browser "jscad.app/#data:text/plain;base64,$(base64 -w 0 "$1")"
+if [ "$(base64 -w 0 "$1" | wc --bytes)" -gt 32000 ]
+then
+  echo "base64 string too long, use view_gzb64 instead"
+else
+  $browser "jscad.app/#data:application/javascript;base64,$(base64 -w 0 "$1")"
+fi
