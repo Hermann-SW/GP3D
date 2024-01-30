@@ -2,4 +2,4 @@
 browser=firefox
 browser=chromium-browser
 
-$browser "https://jscad.app/#data:application/gzip;base64,`gzip -c $1 | base64 -w 0`"
+$browser "https://jscad.app/#data:application/gzip;base64,$(gzip -c "$1" | base64 -w 0)"

@@ -2,4 +2,4 @@
 browser=firefox
 browser=chromium-browser
 
-$browser "jscad.app/#data:text/plain;base64,`base64 -w 0 $1`"
+$browser "jscad.app/#data:text/plain;base64,$(base64 -w 0 "$1")"
