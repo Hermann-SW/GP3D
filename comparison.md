@@ -8,6 +8,11 @@ APP/#data,application/gzip;base64,URL|−|[demo](https://jscad.app/#data:applica
  | | | | ↑ tool
 rendering|✓|✓
 smooth rendering|−|✓
+ | | | |
+drag&drop |✓ |✓ | |
+drag&drop rendering¹| |✓ | |
+
+¹ automatic rendering in case drag&drop file gets changed (does not work with firefox)
 
    
 Tool usage example of JSCAD file with base64 URL larger than jscad.app 32000 bytes limit:  
