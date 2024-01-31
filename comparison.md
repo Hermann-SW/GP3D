@@ -10,9 +10,9 @@ rendering|✅|✅
 smooth rendering|−|✅
  | | | |
 drag&drop |✅ |✅ | |
-drag&drop rendering¹|−|✅ | |
+drag&drop render¹|−|✅ | |
 
-¹ automatic rendering in case drag&drop file gets changed (does not work with firefox)
+¹ automatic render in case drag&drop file gets changed (does not work with firefox)
 
    
 Tool usage example of JSCAD file with base64 URL larger than jscad.app 32000 bytes limit:  
@@ -25,6 +25,6 @@ Opening in existing browser session.
 ~/GP3D $ 
 ```
 
-hit 32KB demo with smooth rendering|JSCAD logo without smooth rendering
+hit 32KB demo with smooth render|JSCAD logo without smooth render
 -|-
 ![res/hit32KB_demo.smooth.jpg](res/hit32KB_demo.smooth.jpg)| ![res/JSCAD_logo.non-smooth.jpg](res/JSCAD_logo.non-smooth.jpg)
