@@ -12,7 +12,8 @@ smooth rendering|−|✅
 drag&drop |✅ |✅ | |
 drag&drop render¹|−|✅ | |
 
-¹ automatic render in case drag&drop file gets changed (does not work with firefox)
+¹ automatic render in case drag&drop file gets changed (does not work with firefox)  
+![res/Peek_2024-01-31_15-50.gif](res/Peek_2024-01-31_15-50.gif)  
 
    
 Tool usage example of JSCAD file with base64 URL larger than jscad.app 32000 bytes limit:  
