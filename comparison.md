@@ -24,3 +24,7 @@ base64 string too long, use view_gzb64 instead
 Opening in existing browser session.
 ~/GP3D $ 
 ```
+
+hit 32KB demo with smooth rendering|JSCAD logo without smooth rendering
+-|-
+![res/hit32KB_demo.smooth.jpg](res/hit32KB_demo.smooth.jpg)| ![res/JSCAD_logo.non-smooth.jpg](res/JSCAD_logo.non-smooth.jpg)
