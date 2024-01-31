@@ -1,2 +1,3 @@
-
-120 128120 128
+module.exports=function main(){
+ return require('@jscad/modeling').primitives.sphere({radius:40})
+}

@@ -1,6 +1,6 @@
 readvec("jscad.gp");
 jscad.open();
-jscad.wlog();
-jscad.wlog_(5!,2^7);
-jscad.wlog(5!,2^7);
+jscad.wlog("module.exports=function main(){");
+jscad.wlog(" return require('@jscad/modeling').primitives.sphere({radius:40})");
+jscad.wlog("}");
 jscad.close();
