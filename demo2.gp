@@ -1,0 +1,17 @@
+readvec("jscad.gp");
+col=[[1,0,0],[0,1,0],[0,0,1],[1,1,0],[1,0,1],[0,1,1]];
+coords=[[0,0],[0,90],[90,90],[180,90],[270,90],[0,180]];
+jscad.open();
+jscad.header(coords,10);
+jscad.header2();
+jscad.wlog("module.exports=function main(){");
+jscad.wlog("  return [");
+for(i=0,#col-1,jscad.wlog(",colorize(",col[1+i],", vertex(",i,",",i>2,"))"));
+for(i=1,#col-1,jscad.wlog(",edge2(",i-1,",",i,")"));
+for(i=0,#col-1,jscad.wlog(",vtxt(",i,",",coords[1+i],")"));
+jscad.wlog("    ,edge(0,5)");
+jscad.wlog("    ,sp_tria(0,1,2,[cube({size:sc,center:[sc,sc,sc/2]})])");
+jscad.wlog("    ,colorize([1,0.666,0],sp_tria(3,4,5,[]))");
+jscad.wlog("  ]");
+jscad.wlog("}");
+jscad.close();
