@@ -10,9 +10,10 @@ assert(b,s)=if(!(b), error(Str(s)));
 
   jscad.header();
    
-  jscad.wlog("module.exports=function main(){");
+  jscad.wlog("function main(params){");
 
-  jscad.wlog("  initfastvertex(colorize([1,0,0],sphere({'radius':0.25})))");
+  jscad.wlog("  initfastvertex(colorize(hexToRgb(params.color),
+                  params.sphere?sphere({'radius':0.25}):cube({'size':0.5})))");
 
   jscad.wlog("  return [");
   for(x=1,n,
@@ -28,6 +29,16 @@ assert(b,s)=if(!(b), error(Str(s)));
   );
   jscad.wlog("  ]");
   jscad.wlog("}");
+
+  jscad.wlog("function getParameterDefinitions() {");
+  jscad.wlog("  return [");
+  jscad.wlog("    ,{ name: 'color', type: 'color', initial: '#FF0000', caption: 'color:' }");
+  jscad.wlog("    ,{ name: 'sphere', type: 'checkbox', initial: true, caption: 'sphere:' }");
+  jscad.wlog("  ];");
+  jscad.wlog("}");
+
+  jscad.wlog("module.exports = { main, getParameterDefinitions }");
+
 
   jscad.close();
 }

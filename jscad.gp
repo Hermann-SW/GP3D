@@ -44,7 +44,7 @@ my(writer);
     jscad.header=(coords, sc)->{
         my(wlog=jscad.wlog);
         wlog("const jscad = require('@jscad/modeling')");
-        wlog("const { colorize } = jscad.colors");
+        wlog("const { colorize, colorNameToRgb, hexToRgb } = jscad.colors");
         wlog("const { cuboid, cube, sphere, cylinder, circle, polygon } = jscad.primitives");
         wlog("const { rotate, translate } = jscad.transforms");
         wlog("const { degToRad } = jscad.utils");
