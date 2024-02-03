@@ -63,6 +63,12 @@ my(writer);
         wlog("sc =", sc);
         wlog("coords =",coords);
 
+        wlog("reusedvertex = sphere({radius:0.25})");
+
+        wlog("function initfastvertex(prim) { reusedvertex=prim; }");
+
+        wlog("function fastvertex(c) { return(translate(c, reusedvertex)) }");
+
         wlog("function vertex(_v, half=false) {");
         wlog("    p = coords[_v] ");
         wlog("    v = map_3D(p,sc)");
