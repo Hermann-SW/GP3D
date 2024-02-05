@@ -60,12 +60,13 @@ get_tqf(n)={
 
     jscad.open();
 
-    jscad.header(coords, sc);
+    jscad.header(sc);
+    jscad.header1(coords);
     jscad.header2();
    
     jscad.wlog("function main(params) {");
 
-    jscad.wlog("sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,-sc/2,sc/2]})]");
+    jscad.wlog("sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,sc/2,sc/2]})]");
 
     jscad.wlog("white = (!params.white) ? [] : [[]");
     jscad.wlog(", colorize([1,1,1],");

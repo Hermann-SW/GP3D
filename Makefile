@@ -18,5 +18,8 @@ tqf_3D.1:
 tqf_3D.2:
 	gp -q < tqf_3D.2.gp
 
+tqf_3D.3:
+	gp -q < tqf_3D.3.gp
+
 clean:
 	rm gp.jscad

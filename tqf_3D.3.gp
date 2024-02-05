@@ -37,6 +37,7 @@ get_tqf(n)={
     Q=qflllgram(get_tqf(n))^-1;
     M=Q~*Q;
     S=[x|x<-Vec(qfminim(M,n)[3]),qfeval(M,x)<=n];
+    \\ S=concat(S,-S);
 
     jscad.open();
 
@@ -47,37 +48,25 @@ get_tqf(n)={
     jscad.wlog("S = [");
     foreach(S,s,
         if(s!=S[1],jscad.wlog_(","));
-        jscad.wlog([norml2((Q*s)~),s[3],(Q*s)~]);
+        jscad.wlog(s~);
     );
     jscad.wlog("]");
 
     jscad.wlog("MS = [");
     foreach(-S,s,
         if(s!=-S[1],jscad.wlog_(","));
-        jscad.wlog([norml2((Q*s)~),s[3],(Q*s)~]);
+        jscad.wlog(s~);
     );
     jscad.wlog("]");
 
     jscad.wlog("if(params.ms) S=S.concat(MS)");
 
-    jscad.wlog("sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,sc/2,sc/2]})]");
-
-    jscad.wlog("white = (!params.white) ? [] : [[]");
-    jscad.wlog(", colorize([1,1,1],");
-    jscad.wlog("      subtract(");
-    jscad.wlog("          sphere({radius: Math.sqrt(params.whiten), segments: 30})");
-    jscad.wlog("          ,sphere({radius: Math.sqrt(params.whiten)-0.3, segments: 30})");
-    jscad.wlog("          ,sub ");
-    jscad.wlog("      )");
-    jscad.wlog("  )");
-    jscad.wlog("]");
-
-    jscad.wlog("let out=[white]");
+    jscad.wlog("let out=[]");
 
     jscad.wlog("function mod(x,m) { return (x<0)?(x%m)+m:x%m }");
 
-    jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
-    jscad.wlog("  out.push(colorize(palette[mod(s[1],params.ncolors)],fastvertex(s[2])))}");
+    jscad.wlog("for(s of S){");
+    jscad.wlog("  out.push(colorize(palette[mod(s[2],params.ncolors)],fastvertex(s)))}");
 
     jscad.wlog("return out }");
 
@@ -85,9 +74,7 @@ get_tqf(n)={
     jscad.wlog("  return [");
     jscad.wlog("    ,{ name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    ,{ name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
-    jscad.wlog("    ,{ name: 'white', type: 'checkbox', checked: true, initial: '20', caption: 'surface of sphere:' },");
     jscad.wlog("    ,{ name: 'whiten', type: 'int', initial: ",n,", min: 1, max: ",n,", caption: 'sphere radius^2:' },");
-    jscad.wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
     jscad.wlog("  ];");
     jscad.wlog("}");
 

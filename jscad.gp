@@ -41,7 +41,7 @@ my(writer);
         fileclose(writer);
     };
 
-    jscad.header=(coords, sc)->{
+    jscad.header=(sc)->{
         my(wlog=jscad.wlog);
         wlog("const jscad = require('@jscad/modeling')");
         wlog("const { colorize, colorNameToRgb, hexToRgb } = jscad.colors");
@@ -58,16 +58,36 @@ my(writer);
         wlog("  return [Math.cos(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.sin(degToRad(c[0]))*Math.sin(degToRad(c[1]))*sc, Math.cos(degToRad(c[1]))*sc]");
         wlog("}");
 
+        wlog("palette=[");
+        wlog("hexToRgb(\"#FFCDF3\"),");
+        wlog("hexToRgb(\"#AD2323\"),");
+        wlog("hexToRgb(\"#E9DEBB\"),");
+        wlog("hexToRgb(\"#2A4BD7\"),");
+        wlog("hexToRgb(\"#FFE433\"),");
+        wlog("hexToRgb(\"#1D6914\"),");
+        wlog("hexToRgb(\"#FF9233\"),");
+        wlog("hexToRgb(\"#814A19\"),");
+        wlog("hexToRgb(\"#29D8D8\"),");
+        wlog("hexToRgb(\"#8126C0\"),");
+        wlog("hexToRgb(\"#9DAFFF\"),");
+        wlog("hexToRgb(\"#81C57A\")");
+        wlog("]");
+
         wlog("eps =", strprintf("%f",eps));
 
         wlog("sc =", sc);
-        wlog("coords =",coords);
 
         wlog("reusedvertex = sphere({radius:0.25})");
 
         wlog("function initfastvertex(prim) { reusedvertex=prim; }");
 
         wlog("function fastvertex(c) { return(translate(c, reusedvertex)) }");
+    };
+
+    jscad.header1=(coords)->{
+        my(wlog=jscad.wlog);
+
+        wlog("coords =",coords);
 
         wlog("function vertex(_v, half=false) {");
         wlog("    p = coords[_v] ");

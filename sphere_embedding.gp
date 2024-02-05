@@ -14,7 +14,8 @@ readvec("undirected_graph.gp");
     jscad.open();
     pal = [ [0.9, 0.0, 0], [0, 0.7, 0.7], [0, 0.9, 0], [0.7, 0, 0.7], [0, 0, 0.9], [0.7, 0.7, 0] ];
 
-    jscad.header(coords, sc);
+    jscad.header(sc);
+    jscad.header1(coords);
     jscad.header2();
    
     jscad.wlog("function main(params) {");
