@@ -74,7 +74,7 @@ get_tqf(n)={
 
     jscad.wlog("let out=[white]");
 
-    jscad.wlog("function mod(x,m) { return (x<0)?(x%m)+m:x%m }");
+    jscad.wlog("function mod(x,m) { x=x%m; return(x<0)?x+m:x }");
 
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
     jscad.wlog("  out.push(colorize(palette[mod(s[1],params.ncolors)],fastvertex(s[2])))}");
