@@ -74,7 +74,12 @@ get_tqf(n)={
 
     jscad.wlog("let out=[white]");
 
-    jscad.wlog("function mod(x,m) { x=x%m; return(x<0)?x+m:x }");
+    jscad.wlog("function mod(x,m) {");
+    jscad.wlog(" if(params.mod) { x=x%m; return(x<0)?x+m:x }");
+    jscad.wlog(" if(x>1) x=1; else if (x<=-params.ncolors+1) x=-params.ncolors+1;");
+    jscad.wlog(" if(x<0) x+=params.ncolors;");
+    jscad.wlog(" return x");
+    jscad.wlog("}");
 
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
     jscad.wlog("  out.push(colorize(palette[mod(s[1],params.ncolors)],fastvertex(s[2])))}");
@@ -84,6 +89,7 @@ get_tqf(n)={
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
     jscad.wlog("    ,{ name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
+    jscad.wlog("    ,{ name: 'mod', type: 'checkbox', initial: true, caption: 'mod:' },");
     jscad.wlog("    ,{ name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
     jscad.wlog("    ,{ name: 'white', type: 'checkbox', checked: true, initial: '20', caption: 'surface of sphere:' },");
     jscad.wlog("    ,{ name: 'whiten', type: 'int', initial: ",n,", min: 1, max: ",n,", caption: 'sphere radius^2:' },");
