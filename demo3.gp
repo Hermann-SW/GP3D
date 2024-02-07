@@ -3,8 +3,8 @@ readvec("jscad.gp");
 assert(b,s)=if(!(b), error(Str(s)));
 
 {
-  assert(getenv("n")!=0);
-  n=eval(getenv("n"));
+  assert(getenv("mult")!=0);
+  mult=eval(getenv("mult"));
 
   jscad.open();
 
@@ -16,9 +16,9 @@ assert(b,s)=if(!(b), error(Str(s)));
                   params.sphere?sphere({'radius':0.25}):cube({'size':0.5})))");
 
   jscad.wlog("  return [");
-  for(x=1,n,
-    for(y=1,n,
-      for(z=1,n,
+  for(x=1,mult,
+    for(y=1,mult,
+      for(z=1,mult,
         c=[x,y,z];
         if((x+y+z)%2==1,
           jscad.wlog(",colorize([0,1,0],fastvertex(",c,"))"),
