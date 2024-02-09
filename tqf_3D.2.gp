@@ -96,7 +96,7 @@ get_tqf(n)={
 
     jscad.wlog("if (params.plane) {");
     jscad.wlog("  out.push(colorize(black,translate(O,sphere({radius:0.1}))))");
-    jscad.wlog("  out.push(colorize([1,1,1,params.alpha],translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
+    jscad.wlog("  out.push(colorize([0.7,0.7,0.7,params.alpha],translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
     jscad.wlog("}");
 
     jscad.wlog("return out }");
