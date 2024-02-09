@@ -51,9 +51,8 @@ get_tqf(n)={
     jscad.wlog("function main(params) {");
 
     PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
-    V=v[1..3]~/sqrt(norml2(v[1..3]~));
     jscad.wlog("O = ",PO);
-    jscad.wlog("N = ",conv(V));
+    jscad.wlog("N = ",conv(PO));
 
     jscad.wlog("S = [");
     foreach(S,s,
