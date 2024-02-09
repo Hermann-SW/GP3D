@@ -104,7 +104,7 @@ get_tqf(n)={
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
-    jscad.wlog("    { name: 'plane', type: 'checkbox', initial: false, caption: 'plane:' },");
+    jscad.wlog("    { name: 'plane', type: 'checkbox', initial: true, caption: 'plane:' },");
     jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
     jscad.wlog("    { name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
