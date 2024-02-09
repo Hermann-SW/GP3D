@@ -38,11 +38,9 @@ get_tqf(n)={
     Q=qflllgram(get_tqf(n))^-1;
     M=Q~*Q;
     S=[x|x<-Vec(qfminim(M,n)[3]),qfeval(M,x)<=n];
-    L=[v[3]|v<-S];
-    C=[[l,#[v|v<-S,v[3]==l]]|l<-[vecmin(L)..vecmax(L)]];
-    mx=vecsort(C,2)[#C][1];
-    P=[(Q*v)~|v<-S,v[3]==mx];
+    P=[(Q*v)~|v<-S,v[3]==vecsort(matreduce([v[3]|v<-S])~,2,4)[1,1]];
     v=matker(Mat(apply(x->concat(x,1),P~)))[,1];
+    PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
 
     jscad.open();
 
@@ -50,7 +48,6 @@ get_tqf(n)={
    
     jscad.wlog("function main(params) {");
 
-    PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
     jscad.wlog("O = ",PO);
     jscad.wlog("N = ",conv(PO));
 
