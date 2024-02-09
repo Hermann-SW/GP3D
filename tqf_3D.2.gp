@@ -1,4 +1,5 @@
 readvec("jscad.gp");
+readvec("utils.gp");
 
 assert(b,s)=if(!(b), error(Str(s)));
 
@@ -37,12 +38,22 @@ get_tqf(n)={
     Q=qflllgram(get_tqf(n))^-1;
     M=Q~*Q;
     S=[x|x<-Vec(qfminim(M,n)[3]),qfeval(M,x)<=n];
+    L=[v[3]|v<-S];
+    C=[[l,#[v|v<-S,v[3]==l]]|l<-[vecmin(L)..vecmax(L)]];
+    mx=vecsort(C,2)[#C][1];
+    P=[(Q*v)~|v<-S,v[3]==mx];
+    v=matker(Mat(apply(x->concat(x,1),P~)))[,1];
 
     jscad.open();
 
     jscad.header(sqrt(n));
    
     jscad.wlog("function main(params) {");
+
+    PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
+    V=v[1..3]~/sqrt(norml2(v[1..3]~));
+    jscad.wlog("O = ",PO);
+    jscad.wlog("N = ",conv(V));
 
     jscad.wlog("S = [");
     foreach(S,s,
@@ -84,16 +95,23 @@ get_tqf(n)={
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
     jscad.wlog("  out.push(colorize(palette[mod(s[1],params.ncolors)],fastvertex(s[2])))}");
 
+    jscad.wlog("if (params.plane) {");
+    jscad.wlog("  out.push(colorize(black,translate(O,sphere({radius:0.1}))))");
+    jscad.wlog("  out.push(colorize([1,1,1,params.alpha],translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
+    jscad.wlog("}");
+
     jscad.wlog("return out }");
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
-    jscad.wlog("    ,{ name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
-    jscad.wlog("    ,{ name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
-    jscad.wlog("    ,{ name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
-    jscad.wlog("    ,{ name: 'whiten', type: 'int', initial: 1, min: 1, max: ",n,", caption: 'sphere radius^2:' },");
-    jscad.wlog("    ,{ name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
-    jscad.wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
+    jscad.wlog("    { name: 'plane', type: 'checkbox', initial: false, caption: 'plane:' },");
+    jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
+    jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
+    jscad.wlog("    { name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
+    jscad.wlog("    { name: 'whiten', type: 'int', initial: 1, min: 1, max: ",n,", caption: 'sphere radius^2:' },");
+    jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
+    jscad.wlog("    { name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
+    jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
     jscad.wlog("  ];");
     jscad.wlog("}");
 

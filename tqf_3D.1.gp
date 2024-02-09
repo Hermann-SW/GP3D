@@ -1,21 +1,7 @@
 readvec("jscad.gp");
+readvec("utils.gp");
 
 assert(b,s)=if(!(b), error(Str(s)));
-
-rad2deg(r)=r/Pi*180;
-
-atan2(y,x)={
-  if(x==0,if(y>0,return(Pi/2),return(3*Pi/2)));
-  if(x>0&&y>=0,return(atan(y/x)));
-  if(x<0,return(Pi+atan(y/x)));
-  if(x>0&&y<0,return(2*Pi+atan(y/x)));
-}
-
-conv(v)={
-    t = acos(v[3]);   
-    r = atan2(v[2],v[1]);
-    [rad2deg(r),rad2deg(t)];
-}
 
 get_tqf(n)={
     assert(n%4!=0);
@@ -69,7 +55,7 @@ get_tqf(n)={
     jscad.wlog("sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,sc/2,sc/2]})]");
 
     jscad.wlog("white = (!params.white) ? [] : [[]");
-    jscad.wlog(", colorize([1,1,1],");
+    jscad.wlog(", colorize([1,1,1,params.alpha],");
     jscad.wlog("      subtract(");
     jscad.wlog("          sphere({radius: sc, segments: 30})");
     jscad.wlog("          ,sphere({radius: sc-0.1, segments: 30})");
@@ -106,10 +92,11 @@ get_tqf(n)={
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
-    jscad.wlog("    ,{ name: 'white', type: 'checkbox', initial: true, caption: 'surface of sphere:' },");
-    jscad.wlog("    ,{ name: 'half', type: 'checkbox', initial: true, caption: 'half vertex:' },");
-    jscad.wlog("    ,{ name: 'vtxt', type: 'choice', values: ['Id', 'theta', 'phi', 'None'], initial: 'Id', caption: 'vtxt:' },");
-    jscad.wlog("    ,{ name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
+    jscad.wlog("    { name: 'white', type: 'checkbox', initial: true, caption: 'surface of sphere:' },");
+    jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
+    jscad.wlog("    { name: 'half', type: 'checkbox', initial: true, caption: 'half vertex:' },");
+    jscad.wlog("    { name: 'vtxt', type: 'choice', values: ['Id', 'theta', 'phi', 'None'], initial: 'Id', caption: 'vtxt:' },");
+    jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
     jscad.wlog("  ];");
     jscad.wlog("}");
 

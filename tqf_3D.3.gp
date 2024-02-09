@@ -78,10 +78,10 @@ get_tqf(n)={
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  return [");
-    jscad.wlog("    ,{ name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
-    jscad.wlog("    ,{ name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
-    jscad.wlog("    ,{ name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
-    jscad.wlog("    ,{ name: 'whiten', type: 'int', initial: ",n,", min: 1, max: ",n,", caption: 'sphere radius^2:' },");
+    jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
+    jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
+    jscad.wlog("    { name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
+    jscad.wlog("    { name: 'whiten', type: 'int', initial: ",n,", min: 1, max: ",n,", caption: 'sphere radius^2:' }");
     jscad.wlog("  ];");
     jscad.wlog("}");
 
