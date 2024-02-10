@@ -32,7 +32,6 @@ get_tqf(n)={
 {
     assert(getenv("n")!=0);
     n=eval(getenv("n"));
-    print("n=",n);
     assert(n%4!=0&&n%8!=7);
 
     Q=qflllgram(get_tqf(n))^-1;
@@ -42,7 +41,6 @@ get_tqf(n)={
     v=matker(Mat(apply(x->concat(x,1),P~)))[,1];
     PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
     ncol=min(12,2-vecmin([v[3]|v<-S]));
-    print("ncol=",ncol);
 
     jscad.open();
 
