@@ -41,6 +41,8 @@ get_tqf(n)={
     P=[(Q*v)~|v<-S,v[3]==vecsort(matreduce([v[3]|v<-S])~,2,4)[1,1]];
     v=matker(Mat(apply(x->concat(x,1),P~)))[,1];
     PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
+    ncol=min(12,2-vecmin([v[3]|v<-S]));
+    print("ncol=",ncol);
 
     jscad.open();
 
@@ -48,7 +50,7 @@ get_tqf(n)={
    
     jscad.wlog("function main(params) {");
 
-    for(i=0,11, jscad.wlog(Str("palette[",i,"]=hexToRgb(params.p_",i,"),")));
+    for(i=0,ncol-1, jscad.wlog(Str("palette[",i,"]=hexToRgb(params.p_",i,"),")));
 
     jscad.wlog("O = ",PO);
     jscad.wlog("N = ",conv(PO));
@@ -101,7 +103,7 @@ get_tqf(n)={
     jscad.wlog("return out }");
 
     jscad.wlog("function getParameterDefinitions() {");
-    jscad.wlog("  return [");
+    jscad.wlog("  ret = [");
     jscad.wlog("    { name: 'plane', type: 'checkbox', initial: true, caption: 'plane:' },");
     jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
@@ -110,20 +112,10 @@ get_tqf(n)={
     jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
     jscad.wlog("    { name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
     jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
-    jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'change colors' },");
-    jscad.wlog("    { name: 'p_0', type: 'color', initial: '#FFCDF3', caption: '0' },");
-    jscad.wlog("    { name: 'p_1', type: 'color', initial: '#AD2323', caption: '1' },");
-    jscad.wlog("    { name: 'p_2', type: 'color', initial: '#E9DEBB', caption: '2' },");
-    jscad.wlog("    { name: 'p_3', type: 'color', initial: '#2A4BD7', caption: '3' },");
-    jscad.wlog("    { name: 'p_4', type: 'color', initial: '#FFE433', caption: '4' },");
-    jscad.wlog("    { name: 'p_5', type: 'color', initial: '#1D6914', caption: '5' },");
-    jscad.wlog("    { name: 'p_6', type: 'color', initial: '#FF9233', caption: '6' },");
-    jscad.wlog("    { name: 'p_7', type: 'color', initial: '#814A19', caption: '7' },");
-    jscad.wlog("    { name: 'p_8', type: 'color', initial: '#29D8D8', caption: '8' },");
-    jscad.wlog("    { name: 'p_9', type: 'color', initial: '#8126C0', caption: '9' },");
-    jscad.wlog("    { name: 'p_10', type: 'color', initial: '#9DAFFF', caption: '10' },");
-    jscad.wlog("    { name: 'p_11', type: 'color', initial: '#81C57A', caption: '11' },");
-    jscad.wlog("  ];");
+    jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'palette' } ]");
+    jscad.wlog("  for(i=0;i<",ncol,";++i)");
+    jscad.wlog("    ret.push({ name: 'p_'+i, type: 'color', initial: rgbToHex(palette[i]), caption: ''+i })");
+    jscad.wlog("  return ret");
     jscad.wlog("}");
 
     jscad.wlog("module.exports = { main, getParameterDefinitions }");
