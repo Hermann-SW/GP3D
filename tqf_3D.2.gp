@@ -48,6 +48,8 @@ get_tqf(n)={
    
     jscad.wlog("function main(params) {");
 
+    for(i=0,11, jscad.wlog(Str("palette[",i,"]=hexToRgb(params.p_",i,"),")));
+
     jscad.wlog("O = ",PO);
     jscad.wlog("N = ",conv(PO));
 
@@ -108,6 +110,19 @@ get_tqf(n)={
     jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
     jscad.wlog("    { name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
     jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
+    jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'change colors' },");
+    jscad.wlog("    { name: 'p_0', type: 'color', initial: '#FFCDF3', caption: '0' },");
+    jscad.wlog("    { name: 'p_1', type: 'color', initial: '#AD2323', caption: '1' },");
+    jscad.wlog("    { name: 'p_2', type: 'color', initial: '#E9DEBB', caption: '2' },");
+    jscad.wlog("    { name: 'p_3', type: 'color', initial: '#2A4BD7', caption: '3' },");
+    jscad.wlog("    { name: 'p_4', type: 'color', initial: '#FFE433', caption: '4' },");
+    jscad.wlog("    { name: 'p_5', type: 'color', initial: '#1D6914', caption: '5' },");
+    jscad.wlog("    { name: 'p_6', type: 'color', initial: '#FF9233', caption: '6' },");
+    jscad.wlog("    { name: 'p_7', type: 'color', initial: '#814A19', caption: '7' },");
+    jscad.wlog("    { name: 'p_8', type: 'color', initial: '#29D8D8', caption: '8' },");
+    jscad.wlog("    { name: 'p_9', type: 'color', initial: '#8126C0', caption: '9' },");
+    jscad.wlog("    { name: 'p_10', type: 'color', initial: '#9DAFFF', caption: '10' },");
+    jscad.wlog("    { name: 'p_11', type: 'color', initial: '#81C57A', caption: '11' },");
     jscad.wlog("  ];");
     jscad.wlog("}");
 
