@@ -105,14 +105,14 @@ get_tqf(n)={
     jscad.wlog("    { name: 'plane', type: 'checkbox', initial: true, caption: 'plane:' },");
     jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
-    jscad.wlog("    { name: 'ncolors', type: 'int', initial: 12, min: 1, max: 12, caption: '#colors:' },");
+    jscad.wlog("    { name: 'ncolors', type: 'int', initial: ",ncol,", min: 1, max: ",ncol,", caption: '#colors:' },");
     jscad.wlog("    { name: 'whiten', type: 'int', initial: 1, min: 1, max: ",n,", caption: 'sphere radius^2:' },");
     jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
     jscad.wlog("    { name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
     jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
     jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'palette' } ]");
     jscad.wlog("  for(i=0;i<",ncol,";++i)");
-    jscad.wlog("    ret.push({ name: 'p_'+i, type: 'color', initial: rgbToHex(palette[i]), caption: ''+i })");
+    jscad.wlog("    ret.push({ name: 'p_'+i, type: 'color', initial: rgbToHex(palette[i]), caption: i+' ('+palettenames[i]+')' })");
     jscad.wlog("  return ret");
     jscad.wlog("}");
 

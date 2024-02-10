@@ -75,6 +75,20 @@ my(writer);
         wlog("hexToRgb(\"#9DAFFF\"),");
         wlog("hexToRgb(\"#81C57A\")");
         wlog("]");
+        wlog("palettenames=[");
+        wlog("'pink',");
+        wlog("'red',");
+        wlog("'tan',");
+        wlog("'blue',");
+        wlog("'yellow',");
+        wlog("'green',");
+        wlog("'orange',");
+        wlog("'brown',");
+        wlog("'cyan',");
+        wlog("'purple',");
+        wlog("'light blue',");
+        wlog("'light green'");
+        wlog("]");
 
         wlog("eps =", strprintf("%f",eps));
 
