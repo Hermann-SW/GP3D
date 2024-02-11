@@ -51,7 +51,7 @@ get_tqf(n)={
     jscad.wlog("for(i=0;i<",ncol,";++i)");
     jscad.wlog("  palette[4+i]=hexToRgb(params['p_'+i])");
 
-    jscad.wlog("O = ",PO);
+    jscad.wlog("PO = ",PO);
     jscad.wlog("N = ",conv(PO));
 
     jscad.wlog("S = [");
@@ -95,7 +95,7 @@ get_tqf(n)={
     jscad.wlog("  out.push(colorize(palette[4+mod(s[1],params.ncolors)],fastvertex(s[2])))}");
 
     jscad.wlog("if (params.plane) {");
-    jscad.wlog("  out.push(colorize(palette[0],translate(O,sphere({radius:0.1}))))");
+    jscad.wlog("  out.push(colorize(palette[0],translate(PO,sphere({radius:0.1}))))");
     jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
     jscad.wlog("}");
 
