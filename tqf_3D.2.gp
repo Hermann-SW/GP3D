@@ -48,7 +48,7 @@ get_tqf(n)={
    
     jscad.wlog("function main(params) {");
 
-    for(i=0,ncol-1, jscad.wlog(Str("palette[",i,"]=hexToRgb(params.p_",i,"),")));
+    for(i=0,ncol-1, jscad.wlog(Str("palette[",4+i,"]=hexToRgb(params.p_",i,"),")));
 
     jscad.wlog("O = ",PO);
     jscad.wlog("N = ",conv(PO));
@@ -72,7 +72,7 @@ get_tqf(n)={
     jscad.wlog("sub = [cube({size: (params.look_inside === 'yes')?sc+0.1:0.01, center: [sc/2,sc/2,sc/2]})]");
 
     jscad.wlog("white = (!params.white) ? [] : [[]");
-    jscad.wlog(", colorize([1,1,1],");
+    jscad.wlog(", colorize(palette[3],");
     jscad.wlog("      subtract(");
     jscad.wlog("          sphere({radius: Math.sqrt(params.whiten), segments: 30})");
     jscad.wlog("          ,sphere({radius: Math.sqrt(params.whiten)-0.3, segments: 30})");
@@ -91,11 +91,11 @@ get_tqf(n)={
     jscad.wlog("}");
 
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
-    jscad.wlog("  out.push(colorize(palette[mod(s[1],params.ncolors)],fastvertex(s[2])))}");
+    jscad.wlog("  out.push(colorize(palette[4+mod(s[1],params.ncolors)],fastvertex(s[2])))}");
 
     jscad.wlog("if (params.plane) {");
-    jscad.wlog("  out.push(colorize(black,translate(O,sphere({radius:0.1}))))");
-    jscad.wlog("  out.push(colorize([0.7,0.7,0.7,params.alpha],translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
+    jscad.wlog("  out.push(colorize(palette[0],translate(O,sphere({radius:0.1}))))");
+    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(O,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
     jscad.wlog("}");
 
     jscad.wlog("return out }");
@@ -110,9 +110,9 @@ get_tqf(n)={
     jscad.wlog("    { name: 'alpha', type: 'slider', initial: 0.8, min: 0, max: 1, step: 0.1, caption: 'alpha:' },");
     jscad.wlog("    { name: 'white', type: 'checkbox', initial: false, caption: 'surface of sphere:' },");
     jscad.wlog("    { name: 'look_inside', type: 'choice', values: ['no', 'yes'], initial: 'yes', caption: 'look_inside:' }");
-    jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'palette' } ]");
+    jscad.wlog("   ,{ name: 'group1', type: 'group', initial: 'closed', caption: 'lospec.com/palette-list/optimum' } ]");
     jscad.wlog("  for(i=0;i<",ncol,";++i)");
-    jscad.wlog("    ret.push({ name: 'p_'+i, type: 'color', initial: rgbToHex(palette[i]), caption: i+' ('+palettenames[i]+')' })");
+    jscad.wlog("    ret.push({ name: 'p_'+i, type: 'color', initial: rgbToHex(palette[4+i]), caption: i+' ('+palettenames[4+i]+')' })");
     jscad.wlog("  return ret");
     jscad.wlog("}");
 
