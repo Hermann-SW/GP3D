@@ -63,12 +63,12 @@ my(writer);
         wlog("palette=[");
         wlog("hexToRgb(\"#000000\"),hexToRgb(\"#575757\"),hexToRgb(\"#A0A0A0\"),hexToRgb(\"#FFFFFF\"),");
         wlog("hexToRgb(\"#FFCDF3\"),hexToRgb(\"#AD2323\"),hexToRgb(\"#E9DEBB\"),hexToRgb(\"#2A4BD7\"),");
-        wlog("hexToRgb(\"#FFEE33\"),hexToRgb(\"#1D6914\"),hexToRgb(\"#FF9233\"),hexToRgb(\"#814A19\"),");
-        wlog("hexToRgb(\"#29D0D0\"),hexToRgb(\"#8126C0\"),hexToRgb(\"#9DAFFF\"),hexToRgb(\"#81C57A\")");
+        wlog("hexToRgb(\"#FFEE33\"),hexToRgb(\"#1D6914\"),hexToRgb(\"#81C57A\"),hexToRgb(\"#814A19\"),");
+        wlog("hexToRgb(\"#29D0D0\"),hexToRgb(\"#8126C0\"),hexToRgb(\"#9DAFFF\"),hexToRgb(\"#FF9233\")");
         wlog("]");
         wlog("palettenames=[");
         wlog("'black','very dark gray','dark gray','white','pink','red','tan','blue',");
-        wlog("'yellow','green','orange','brown','cyan','purple','light blue','light green'");
+        wlog("'yellow','green','light green','brown','cyan','purple','light blue','orange'");
         wlog("]");
 
         wlog("eps =", strprintf("%f",eps));

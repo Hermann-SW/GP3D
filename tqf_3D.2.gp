@@ -48,7 +48,8 @@ get_tqf(n)={
    
     jscad.wlog("function main(params) {");
 
-    for(i=0,ncol-1, jscad.wlog(Str("palette[",4+i,"]=hexToRgb(params.p_",i,"),")));
+    jscad.wlog("for(i=0;i<",ncol,";++i)");
+    jscad.wlog("  palette[4+i]=hexToRgb(params['p_'+i])");
 
     jscad.wlog("O = ",PO);
     jscad.wlog("N = ",conv(PO));
