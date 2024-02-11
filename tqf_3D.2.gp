@@ -40,6 +40,7 @@ get_tqf(n)={
     P=[(Q*v)~|v<-S,v[3]==vecsort(matreduce([v[3]|v<-S])~,2,4)[1,1]];
     v=matker(Mat(apply(x->concat(x,1),P~)))[,1];
     PO=-v[4]/(norml2(v[1..3]))*v[1..3]~;
+    P1=(Q*[0,0,1]~)~;
     ncol=min(12,2-vecmin([v[3]|v<-S]));
 
     jscad.open();
@@ -51,7 +52,8 @@ get_tqf(n)={
     jscad.wlog("for(i=0;i<",ncol,";++i)");
     jscad.wlog("  palette[4+i]=hexToRgb(params['p_'+i])");
 
-    jscad.wlog("PO = ",PO);
+    jscad.wlog("PO =",PO);
+    jscad.wlog("DO =", P1-((P1*PO~)*(PO/norml2(PO))~)~);
     jscad.wlog("N = ",conv(PO));
 
     jscad.wlog("S = [");
@@ -94,16 +96,17 @@ get_tqf(n)={
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
     jscad.wlog("  out.push(colorize(palette[4+mod(s[1],params.ncolors)],fastvertex(s[2])))}");
 
-    jscad.wlog("if (params.plane) {");
+    jscad.wlog("if (params.plane !== 'none') {");
     jscad.wlog("  out.push(colorize(palette[0],translate(PO,sphere({radius:0.1}))))");
-    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(PO,rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
+    jscad.wlog("  out.push(colorize(palette[1],translate(DO,sphere({radius:0.1}))))");
+    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(params.plane === 'max'?PO:[0,0,0],rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
     jscad.wlog("}");
 
     jscad.wlog("return out }");
 
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  ret = [");
-    jscad.wlog("    { name: 'plane', type: 'checkbox', initial: true, caption: 'plane:' },");
+    jscad.wlog("    { name: 'plane', type: 'choice', values: ['none', 'max', 'origin'], initial: 'max', caption: 'plane:' },");
     jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
     jscad.wlog("    { name: 'ncolors', type: 'int', initial: ",ncol,", min: 1, max: ",ncol,", caption: '#colors:' },");
