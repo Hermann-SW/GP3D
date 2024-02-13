@@ -56,7 +56,8 @@ get_tqf(n,vstart)={
     jscad.wlog("  palette[4+i]=hexToRgb(params['p_'+i])");
 
     jscad.wlog("PO =",PO);
-    jscad.wlog("DO =", P1-((P1*PO~)*(PO/norml2(PO))~)~);
+    jscad.wlog("// P1 =",P1," norml2 =",norml2(P1));
+    if(PO==[0,0,0],jscad.wlog("D0 =", PO),jscad.wlog("DO =", P1-((P1*PO~)*(PO/norml2(PO))~)~, "  // norml2 =",norml2(P1-((P1*PO~)*(PO/norml2(PO))~)~)));
     jscad.wlog("N = ",conv(PO));
 
     jscad.wlog("S = [");
