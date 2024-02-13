@@ -3,14 +3,15 @@ readvec("utils.gp");
 
 assert(b,s)=if(!(b), error(Str(s)));
 
-get_tqf(n)={
+get_tqf(n,vstart)={
     assert(n%4!=0);
     assert(n%8!=7);
     my(Q,v,b,p,a12);
     if(n%4==2,
-        for(vv=0,oo,
+        for(vv=vstart,oo,
             if(ispseudoprime((4*vv+1)*n-1),
                 v=vv; break()));
+        print(v+1);
         b=4*v+1;
         p=b*n-1;
         assert(kronecker(-b,p)==1);
@@ -18,9 +19,10 @@ get_tqf(n)={
         ,
         my(c=4-(n%4));
         assert(((c*n-1)/2)%2==1);
-        for(vv=0,oo,
+        for(vv=vstart,oo,
             if(ispseudoprime(((8*vv+c)*n-1)/2),
                 v=vv; break()));
+        print(v+1);
         b=8*v+c;
         p=(b*n-1)/2;
         assert(kronecker(-b,p)==1);
@@ -33,8 +35,9 @@ get_tqf(n)={
     assert(getenv("n")!=0);
     n=eval(getenv("n"));
     assert(n%4!=0&&n%8!=7);
+    vstart=if(getenv("vstart"),eval(getenv("vstart")),0);
 
-    Q=qflllgram(get_tqf(n))^-1;
+    Q=qflllgram(get_tqf(n,vstart))^-1;
     M=Q~*Q;
     S=[x|x<-Vec(qfminim(M,n)[3]),qfeval(M,x)<=n];
     P=[(Q*v)~|v<-S,v[3]==vecsort(matreduce([v[3]|v<-S])~,2,4)[1,1]];
