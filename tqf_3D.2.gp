@@ -100,6 +100,9 @@ get_tqf(n,vstart)={
     jscad.wlog("for(s of S){if(s[0]>=params.whiten)");
     jscad.wlog("  out.push(colorize(palette[4+mod(s[1],params.ncolors)],fastvertex(s[2])))}");
 
+    jscad.wlog("if (params.hull)");
+    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),hull(out)))");
+
     jscad.wlog("if (params.plane !== 'none') {");
     jscad.wlog("  out.push(colorize(palette[0],translate(PO,sphere({radius:0.1}))))");
     jscad.wlog("  out.push(colorize(palette[1],translate(DO,sphere({radius:0.1}))))");
@@ -111,6 +114,7 @@ get_tqf(n,vstart)={
     jscad.wlog("function getParameterDefinitions() {");
     jscad.wlog("  ret = [");
     jscad.wlog("    { name: 'plane', type: 'choice', values: ['none', 'max', 'origin'], initial: 'max', caption: 'plane:' },");
+    jscad.wlog("    { name: 'hull', type: 'checkbox', initial: false, caption: 'hull:' },");
     jscad.wlog("    { name: 'ms', type: 'checkbox', initial: false, caption: 'S=concat(S,-S):' },");
     jscad.wlog("    { name: 'mod', type: 'checkbox', initial: false, caption: 'mod:' },");
     jscad.wlog("    { name: 'ncolors', type: 'int', initial: ",ncol,", min: 1, max: ",ncol,", caption: '#colors:' },");
