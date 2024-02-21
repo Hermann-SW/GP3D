@@ -106,7 +106,7 @@ get_tqf(n,vstart)={
     jscad.wlog("if (params.plane !== 'none') {");
     jscad.wlog("  out.push(colorize(palette[0],translate(PO,sphere({radius:0.1}))))");
     jscad.wlog("  out.push(colorize(palette[1],translate(DO,sphere({radius:0.1}))))");
-    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(params.plane === 'max'?PO:[0,0,0],rotateZ(degToRad(90+N[0]),rotate([degToRad(N[1]),0,0],cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
+    jscad.wlog("  out.push(colorize(palette[2].concat(params.alpha),translate(params.plane === 'max'?PO:[0,0,0],rotateZ(degToRad(90+N[0]),rotateX(degToRad(N[1]),cuboid({size: [2*sc+1,2*sc+1,0.02]}))))))");
     jscad.wlog("}");
 
     jscad.wlog("return out }");
