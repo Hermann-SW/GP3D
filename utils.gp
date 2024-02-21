@@ -8,6 +8,7 @@ atan2(y,x)={
 }
 
 conv(v)={
+    if(norml2(v)==0,return([0,0]));
     t = acos(v[3]/sqrt(norml2(v)));
     r = atan2(v[2],v[1]);
     [rad2deg(r),rad2deg(t)];
