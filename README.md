@@ -1,3 +1,5 @@
+# README.md update WORK_IN_PROGRESS  
+
 # GP3D
 
 This repo provides 3D graphics for PARI/GP, by generating JSCAD output for view+navigate in browser.  
