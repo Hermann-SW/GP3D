@@ -66,3 +66,10 @@ tools/view_gzb64 gp.jscad
 for((i=1;i<360;i+=10)); do a=$i c=2.5 gp -q < demo5.gp; echo $i; sleep 1; done
 ```
 ![res/Peek_2024-02-22_14-57.gif](res/Peek_2024-02-22_14-57.gif)
+
+
+### tqf_3D.2
+
+[tqf_3D.2.gp](tqf_3D.2.gp)  
+
+![res/tqf_3D.2.gp.n_37.jpg](res/tqf_3D.2.gp.n_37.jpg)
